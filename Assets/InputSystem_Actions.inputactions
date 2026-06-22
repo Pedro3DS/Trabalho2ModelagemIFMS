@@ -82,10 +82,10 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -569,6 +569,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Tab",
+                    "type": "Button",
+                    "id": "220de97a-742c-467f-8951-d546106cc912",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -989,72 +998,26 @@
                     "action": "TrackedDeviceOrientation",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Camera",
-            "id": "5f75ba7d-576b-42f1-8bf1-6b72d5022996",
-            "actions": [
-                {
-                    "name": "MouseX",
-                    "type": "Value",
-                    "id": "2a78f39d-b991-42ab-8b29-ea2e1f043f48",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 },
-                {
-                    "name": "MouseY",
-                    "type": "Value",
-                    "id": "515dc3f6-261c-4edf-88c9-20d436c13dc5",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "MouseScroll",
-                    "type": "Value",
-                    "id": "52fe0341-ac77-4eef-8f7a-7dc23e28407a",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
                 {
                     "name": "",
-                    "id": "1f53aa4c-01b2-4fa6-9e98-8913256d14b9",
-                    "path": "<Mouse>/rightButton",
+                    "id": "95e4e74b-c7df-4216-91e2-04bd60489069",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseX",
+                    "action": "Tab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b016a7a2-9429-43ff-be10-27a2efc089d4",
-                    "path": "<Mouse>/rightButton",
+                    "id": "37496183-e1aa-4826-9307-3ce7fcc601e4",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseY",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3fc1ba0f-4403-432f-aedc-d64c2f9ad9e8",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseScroll",
+                    "action": "Tab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

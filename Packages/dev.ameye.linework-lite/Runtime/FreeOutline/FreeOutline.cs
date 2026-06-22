@@ -24,19 +24,15 @@ namespace LineworkLite.FreeOutline
         {
             private FreeOutlineSettings settings;
             private Material mask, outlineBase, clear;
-#if UNITY_6000_0_OR_NEWER
-#else
+            // Needed unconditionally: the legacy Execute() path below also runs on Unity 6
+            // whenever Render Graph Compatibility Mode is enabled, not just on pre-Unity-6.
             private readonly ProfilingSampler maskSampler, outlineSampler;
-#endif
-            
+
             public FreeOutlinePass()
             {
                 profilingSampler = new ProfilingSampler(nameof(FreeOutlinePass));
-#if UNITY_6000_0_OR_NEWER
-#else
                 maskSampler = new ProfilingSampler(ShaderPassName.Mask);
                 outlineSampler = new ProfilingSampler(ShaderPassName.Outline);
-#endif
             }
             
             public bool Setup(ref FreeOutlineSettings freeOutlineSettings, ref Material maskMaterial, ref Material outlineMaterial, ref Material clearMaterial)
@@ -315,7 +311,12 @@ namespace LineworkLite.FreeOutline
 
                 }
             }
-#else
+#endif
+
+            // Legacy (non-Render Graph) path.
+            // This is NOT exclusive to pre-Unity-6: URP also calls this on Unity 6 whenever
+            // Render Graph Compatibility Mode is enabled in Project Settings > Graphics,
+            // so it must always be compiled, not just gated behind !UNITY_6000_0_OR_NEWER.
             private RTHandle cameraDepthRTHandle;
             
             #pragma warning disable 618, 672
@@ -462,8 +463,7 @@ namespace LineworkLite.FreeOutline
                 
                 cameraDepthRTHandle = null;
             }
-#endif
-            
+
             public void Dispose()
             {
                 settings = null; // de-reference settings to allow them to be freed from memory
@@ -519,9 +519,9 @@ namespace LineworkLite.FreeOutline
             var render = freeOutlinePass.Setup(ref settings, ref maskMaterial, ref outlineMaterial, ref clearMaterial);
             if (render) renderer.EnqueuePass(freeOutlinePass);
         }
-        
-#if UNITY_6000_0_OR_NEWER
-#else
+
+        // Legacy (non-Render Graph) hook. URP also calls this on Unity 6 when
+        // Render Graph Compatibility Mode is enabled, so this must stay unconditional.
         #pragma warning disable 618, 672
         public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
         {
@@ -531,7 +531,6 @@ namespace LineworkLite.FreeOutline
             freeOutlinePass.SetTarget(renderer.cameraDepthTargetHandle);
         }
         #pragma warning restore 618, 672
-#endif
         
         /// <summary>
         /// Clean up resources allocated to the Scriptable Renderer Feature such as materials.
